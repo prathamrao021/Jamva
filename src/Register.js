@@ -3,13 +3,34 @@ import './App.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react';
+import { Navigate } from 'react-router';
 
 function Register() {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
-    const Sb = () =>{
-        console.log(name, phone);
+    const [otp, setOTP] = useState("");
+    
+    const Sub = async (e) =>{
+        // console.log(name, phone);
+        e.preventDefault();
+        try {
+          let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
+            method: "POST",
+            body: JSON.stringify({
+                otp: otp
+              }), 
+          });
+          let resJson = await res.json();
+          if (res.status === 200) {
+            setMessage("User created successfully");
+            navigate(`/Home`);
+          } else {
+            setMessage("Some error occured");
+          }
+        } catch (err) {
+          console.log(err);
+        }
     }
 
     const getOTP = async (e) => {
@@ -19,9 +40,8 @@ function Register() {
             method: "GET",
           });
           let resJson = await res.json();
+          let userId = resJson.id;
           if (res.status === 200) {
-            setName("");
-            setPhone("");
             setMessage("User created successfully");
           } else {
             setMessage("Some error occured");
@@ -29,7 +49,7 @@ function Register() {
         } catch (err) {
           console.log(err);
         }
-      };
+    };
 
   return (
     <><img src={loginImage} ></img>
@@ -52,13 +72,13 @@ function Register() {
 
         <Form.Group className="mb-3 border1" controlId="formBasicPassword">
             {/* <Form.Label>Password</Form.Label> */}
-            <Form.Control type="text" placeholder="Enter OTP" />
+            <Form.Control type="text" placeholder="Enter OTP" value={otp}/>
         </Form.Group>
 
         {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
         </Form.Group> */}
-        <Button onClick={Sb} className="submitbtn" variant="success">
+        <Button onClick={Sub} className="submitbtn" variant="success">
             Submit
         </Button>
         <Button className="submitbtn" variant="success" type="submit">
