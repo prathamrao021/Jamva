@@ -10,16 +10,16 @@ import Description from './Description';
 import TotalToKitchen from './TotalToKitchen';
 import Bill from './Bill';
 import Makepayment from './Makepayment';
+import {useState} from 'react';
 
 import { 
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-import { useState } from 'react';
+
 
 function App() {
-  const [items, setItems] = useState([]);
   
   const reg = (
   <div className="App">
@@ -29,6 +29,9 @@ function App() {
     </header>
   </div>);
 
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  
   return (
     <>
     <BrowserRouter>
