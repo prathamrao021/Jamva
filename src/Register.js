@@ -21,6 +21,7 @@ function Register() {
           let resJson = await res.json();
           if (res.status === 200) {
             setName("");
+            setPhone("");
             setMessage("User created successfully");
           } else {
             setMessage("Some error occured");
