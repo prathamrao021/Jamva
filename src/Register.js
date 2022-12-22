@@ -17,7 +17,6 @@ function Register() {
     const Sub = async (e) =>{ 
 
         e.preventDefault();
-        navigate(`/home`, {state:{resId:1, userId: userId}});
         try {
           let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
             method: "POST",
@@ -29,7 +28,7 @@ function Register() {
           let resJson = await res.json();
           if (res.status === 200) {
             setMessage("User created successfully");
-            // navigate(`/home`, {state:{resId:1, userId: userId}});
+            navigate(`/home`, {state:{resId:1, userId: userId}});
           } else {
             setMessage("Some error occured");
           }
@@ -40,13 +39,12 @@ function Register() {
 
     const getOTP = async (e) => {
         e.preventDefault();
-        userId = 2;
         try {
           let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
             method: "GET",
           });
           let resJson = await res.json();
-        //  userId = resJson.id;
+         userId = resJson.id;
           if (res.status === 200) {
             setMessage("User created successfully");
           } else {
