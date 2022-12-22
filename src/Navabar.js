@@ -24,9 +24,8 @@ const details = async (e) =>{
           }), 
       });
       let resJson = await res.json();
-      console.log(resJson)
       if (res.status === 200) {
-        console.log("Working Fine.");
+        console.log("Navabar.");
         setresName(resJson.data[0].name);
       } else {
         console.log("Not Working")
