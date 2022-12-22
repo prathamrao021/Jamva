@@ -3,44 +3,50 @@ import './App.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function Register() {
+    let navigate = useNavigate();
+    let userId;
+
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
     const [otp, setOTP] = useState("");
     
-    const Sub = async (e) =>{
-        // console.log(name, phone);
+    const Sub = async (e) =>{ 
+
         e.preventDefault();
+        navigate(`/home`, {state:{resId:1, userId: userId}});
         try {
           let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
             method: "POST",
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                otp: otp
+                "otp": otp
               }), 
           });
           let resJson = await res.json();
           if (res.status === 200) {
             setMessage("User created successfully");
-            navigate(`/Home`);
+            // navigate(`/home`, {state:{resId:1, userId: userId}});
           } else {
             setMessage("Some error occured");
           }
         } catch (err) {
           console.log(err);
         }
-    }
+    };
 
     const getOTP = async (e) => {
         e.preventDefault();
+        userId = 2;
         try {
           let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
             method: "GET",
           });
           let resJson = await res.json();
-          let userId = resJson.id;
+        //  userId = resJson.id;
           if (res.status === 200) {
             setMessage("User created successfully");
           } else {
@@ -72,7 +78,7 @@ function Register() {
 
         <Form.Group className="mb-3 border1" controlId="formBasicPassword">
             {/* <Form.Label>Password</Form.Label> */}
-            <Form.Control type="text" placeholder="Enter OTP" value={otp}/>
+            <Form.Control type="text" placeholder="Enter OTP" onChange={event => setOTP(event.target.value)} value={otp}/>
         </Form.Group>
 
         {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">

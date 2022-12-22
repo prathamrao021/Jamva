@@ -6,8 +6,15 @@ import login from './loginimage.png';
 import cuisine1 from './cuisine1.jpg';
 import cuisine2 from './cuisine2.jpg';
 import cuisine3 from './cuisine3.jpg';
+import { useLocation } from 'react-router';
+
+
 function Home() {
-  return (
+    let location = useLocation();
+    // console.log(location.state.resId);
+    // console.log(location.state.userId);
+    return (
+
     <>
     <h3 className='m-2'>Trending</h3>
     <div className='m-1 trending'>
@@ -50,14 +57,6 @@ function Home() {
 
         <Card className="cardholder">
         <Card.Img variant="top" src={login} />
-        {/* <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-        </Card.Body> */}
         </Card>
         
     </div>
