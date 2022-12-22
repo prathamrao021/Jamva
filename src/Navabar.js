@@ -40,7 +40,7 @@ function NavBar() {
     <Navbar className="navbar" expand="lg">
       <Container>
         <Navbar.Brand><img style={{width:"10vw"}} src={man}></img></Navbar.Brand>
-        <Navbar.Brand href="#home">{{resName}}</Navbar.Brand>
+        <Navbar.Brand href="#home">{resName}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
