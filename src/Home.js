@@ -7,15 +7,44 @@ import cuisine1 from './cuisine1.jpg';
 import cuisine2 from './cuisine2.jpg';
 import cuisine3 from './cuisine3.jpg';
 import { useLocation } from 'react-router';
+import { useState } from 'react'
 
 
 function Home() {
     let location = useLocation();
-    // console.log(location.state.resId);
-    // console.log(location.state.userId);
+    const [category, setCategory] = useState([]);
+
+    const categori = async (e) =>{
+    e.preventDefault();
+    try {
+      let res = await fetch ("http://127.0.0.1:8000/restaurant/menu/", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "resId": location.state.resId
+          }),
+      });
+      let resJson = await res.json();
+      console.log(resJson)
+
+      if (res.status === 200) {
+        console.log("Working Fine.");
+        for(let i=0; i<resJson.data.length; i++){
+            setCategory(category => [...category, resJson.data[i].category]);
+        }
+        console.log(setCategory);
+      } else {
+        console.log("Not Working");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    };
+
     return (
 
     <>
+    <div onLoad={categori}>
     <h3 className='m-2'>Trending</h3>
     <div className='m-1 trending'>
         
@@ -76,6 +105,7 @@ function Home() {
     </div>
     <div className='cuisinecard'>
         <div className="cuisinesphoto" style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine2})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Beverages</div>
+    </div>
     </div>
     </>
   
