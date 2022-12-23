@@ -7,16 +7,19 @@ import cuisine1 from './cuisine1.jpg';
 import cuisine2 from './cuisine2.jpg';
 import cuisine3 from './cuisine3.jpg';
 import { useLocation } from 'react-router';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function Home() {
     let location = useLocation();
     const [category, setCategory] = useState([]);
-    const categori = async (e) =>{
-    e.preventDefault();
+     useEffect (()=>{
+        categori()
+        console.log(category)
+    }, []);
+    const categori = async () =>{
     try {
-      let res = await fetch ("http://127.0.0.1:8000/restaurant/menu/", {
+      let res = await fetch ("http://127.0.0.1:8000/restaurant/category/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -28,22 +31,25 @@ function Home() {
 
       if (res.status === 200) {
         console.log("Working Fine.");
-        for(let i=0; i<resJson.data.length; i++){
-            setCategory([resJson.data[i].category]);
-        }
-        console.log(setCategory);
+        // for(let i=0; i<resJson.data.length; i++){
+        //     arr.push(resJson.data[i].category);
+        //     console.log(resJson.data[i].category);
+        // }
+        setCategory(resJson.data);
+        console.log(category );
       } else {
         console.log("Not Working");
       }
     } catch (err) {
       console.log(err);
     }
-    };
 
+    };
+    // categori()
     return (
 
     <>
-    <div onLoad={categori}>
+    <div>
     <h3 className='m-2'>Trending</h3>
     <div className='m-1 trending'>
         
@@ -88,23 +94,21 @@ function Home() {
         </Card>
         
     </div>
+     <h3 className='m-2'>Cuisines</h3>
+    <div>
+    {
+
+        category.map((item, i) => (
+        <div key={i} className='cuisinecard'>
+
+            <div className='cuisinesphoto' style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(http://127.0.0.1:8000${item.catImage})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>{item.category}</div>
+        </div>
+            )
+        )
+    }    
+    </div>
+   
     
-    <h3 className='m-2'>Cuisines</h3>
-    <div className='cuisinecard'>
-        <div className='cuisinesphoto' style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine1})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Mexican</div>
-    </div>
-    <div className='cuisinecard'>
-        <div className="cuisinesphoto" style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine2})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Indian</div>
-    </div>
-    <div className='cuisinecard'>
-        <div className="cuisinesphoto" style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine3})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Chinese</div>
-    </div>
-    <div className='cuisinecard'>
-        <div className='cuisinesphoto' style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine1})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Italian</div>
-    </div>
-    <div className='cuisinecard'>
-        <div className="cuisinesphoto" style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(${cuisine2})`, backgroundPosition: '0px', backgroundSize: 'cover'}}>Beverages</div>
-    </div>
     </div>
     </>
   
