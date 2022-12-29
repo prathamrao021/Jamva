@@ -17,6 +17,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import IndividualOrder from './IndividualOrder';
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
       <Routes>
         <Route path='/' element={reg}/>
         <Route path='/home' element={<><NavBar/> <Home/></>}/>
-        <Route path='/cuisine' element={<><NavBar/> <Cuisine/> <Individual/></>}/>
+        <Route path='/cuisine' element={<><NavBar/> <Cuisine/> <IndividualOrder/></>}/>
         <Route path='/desc' element={<><NavBar/> <Description/> <TotalToKitchen/></>}/>
         <Route path='/bill' element={<><NavBar/> <Bill/> <Makepayment/></>}/>
         <Route path='/feedback' element={<><NavBar/> <Home/></>}/>
