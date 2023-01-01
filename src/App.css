@@ -30,6 +30,12 @@
   color: #61dafb;
 }
 
+.registerimg{
+  border-radius: 30pc;
+  height: 300px;
+  margin-top: 20px;
+}
+
 .leftalign{
   flex: 50%;
   display: flex;
