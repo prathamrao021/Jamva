@@ -14,12 +14,11 @@ function Register() {
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
     const [otp, setOTP] = useState("");
-    let [mins, setMins] = useState(1);
-    let [secs, setSecs] = useState(5);
-    let myInterval;
+    let [seconds, setSeconds] = useState(60);
+    const [disable1, setDisable1] = useState(false);
+    const [disable2, setDisable2] = useState(true);
 
     const Sub = async (e) =>{ 
-
         e.preventDefault();
         try {
           let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
@@ -42,61 +41,44 @@ function Register() {
     };
 
     const getOTP = async (e) => {
-        // e.preventDefault();
-        // try {
-        //   let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
-        //     method: "GET",
-        //   });
-        //   let resJson = await res.json();
-        //  userId = resJson.id;
-        //   if (res.status === 200) {
-        //     setMessage("User created successfully");
-        //   } else {
-        //     setMessage("Some error occured");
-        //   }
-        // } catch (err) {
-        //   console.log(err);
-        // }
         
-        myInterval = setInterval(()=>{
-          stopwatch()
-        },1000
-        );
+        setDisable1(true);
+        setDisable2(true);
+        e.preventDefault();
+        try {
+          let res = await fetch(`http://127.0.0.1:8000/userlogin/${phone}/${name}`, {
+            method: "GET",
+          });
+          let resJson = await res.json();
+         userId = resJson.id;
+          if (res.status === 200) {
+            setMessage("User created successfully");
+          } else {
+            setMessage("Some error occured");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+
+        
+        //timer
+        let count = seconds;
+        let id = setInterval(() => 
+        {
+          if (count > 1) 
+          {
+            count -= 1;
+            setSeconds(count);
+            console.log(count);
+          } 
+          else{
+            clearInterval(id);
+            setDisable2(false);
+            setSeconds(60);
+          }
+        }, 1000);
     };
-
-    const stopwatch = () =>{
-      console.log(mins,secs);
-
-      // document.getElementbyId('getotp').innerHTML="mins:secs"
-
-      if(mins>=0)
-      { 
-        if(secs>=0)
-        {
-          setSecs((secs)=>(secs-1));
-        }
-        else
-        {
-          console.log("ghjk")
-          setSecs(()=>60);
-          setMins((mins)=>(mins-1));
-        }
-      }
-      if(mins<0)
-      {
-        if(secs > 0)
-        {
-          setSecs((secs)=>(secs-1));;
-        }
-        if(secs===0)
-        {
-          clearInterval(myInterval);
-          console.log("Expired");
-        }
-      }
-      // setSecs((secs)=>(secs-1));
-    };
-
+    
   return (
     <><img className='registerimg' src={jamva} ></img>
     <div className="leftalign">
@@ -114,8 +96,9 @@ function Register() {
             {/* <Form.Label>Password</Form.Label> */}
             <Form.Control type="text" placeholder="Phone Number" onChange={event => setPhone(event.target.value)} value={phone}/>
         </Form.Group>
-        <span onClick={getOTP} className='getotp'>GET OTP {mins}:{secs}</span>
-
+        <Button  className='getotp' onClick={getOTP} variant="dark" disabled={disable1}>GET OTP  
+        {/* {Math.floor(seconds / 60)}:{seconds % 60 < 10 ? "0" : ""}{seconds % 60} */}
+        </Button>
         <Form.Group className="mb-3 border1" controlId="formBasicPassword">
             {/* <Form.Label>Password</Form.Label> */}
             <Form.Control type="text" placeholder="Enter OTP" onChange={event => setOTP(event.target.value)} value={otp}/>
@@ -127,8 +110,8 @@ function Register() {
         <Button onClick={Sub} className="submitbtn" variant="success">
             Submit
         </Button>
-        <Button className="submitbtn" variant="success" type="submit">
-            Resend OTP
+        <Button className="submitbtn" variant="success" onClick={getOTP} disabled={disable2}>
+            {disable2? Math.floor(seconds / 60)+":"+(seconds % 60 < 10 ? "0" : "")+(seconds % 60): "Resend OTP"}
         </Button>
         </Form>
     </div></>       
