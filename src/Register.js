@@ -78,7 +78,7 @@ function Register() {
           }
         }, 1000);
     };
-    
+
   return (
     <><img className='registerimg' src={jamva} ></img>
     <div className="leftalign">
@@ -111,7 +111,7 @@ function Register() {
             Submit
         </Button>
         <Button className="submitbtn" variant="success" onClick={getOTP} disabled={disable2}>
-            {disable2? Math.floor(seconds / 60)+":"+(seconds % 60 < 10 ? "0" : "")+(seconds % 60): "Resend OTP"}
+            {disable2 && disable1 ? Math.floor(seconds / 60)+":"+(seconds % 60 < 10 ? "0" : "")+(seconds % 60): "Resend OTP"}
         </Button>
         </Form>
     </div></>       
