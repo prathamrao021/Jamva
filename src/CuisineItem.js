@@ -1,139 +1,95 @@
 import './App.css';
+import { useLocation } from 'react-router';
+import { useState, useEffect } from 'react'
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import loginImage from './loginimage.png';
 import veg from './veg.jpg';
 import Button from 'react-bootstrap/esm/Button';
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
 function CuisineItem() {
-  return (
-    <>
-    <div className='cuisinepage'>
-        {/* <div className='m-2'>
-            <div className='cuisineitmes'>Upma <span className='rightsided'>Rs 300</span></div>
-            <div className='cuisineitmes'>Rava Upma <span className='rightsided'>Rs 300</span></div>
-            <div className='cuisineitmes'>Semai Upma <span className='rightsided'>Rs 300</span></div>
-            <div className='cuisineitmes'>Apam <span className='rightsided'>Rs 300</span></div>
-            <div className='cuisineitmes'>Idli Apam <span className='rightsided'>Rs 300</span></div>
-        </div> */}
-        <div className='cuisines'>
-            <div className='cuisineitems'>
-                <div>
-                    <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
-                </div>
-                <div className='itemname'>
-                    Chatpata Tikki Filler Burger[Spicy]
-                </div>
-                <div className='reviewfont'>
-                    REVIEW
-                </div>
-                <div>
-                    <spna>&#8377;55.00</spna>
-                </div>
-                <div className='reviewfont'>
-                    Eirmod at est diam gubergren duo accusam elitr. Duo dolores ipsum clita ea elitr diam consetetur stet dolor, lorem amet.
-                </div>
-            </div>
-            <div className='cuisinesphoto'>
-                <img src={loginImage}></img>
-                <Button style={{width:"100%"}} variant="danger">Add</Button>
-            </div>
-        </div>
-        <hr></hr>
-        <div className='cuisines'>
-            <div className='cuisineitems'>
-                <div>
-                    <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
-                </div>
-                <div className='itemname'>
-                    Chatpata Tikki Filler Burger[Spicy]
-                </div>
-                <div className='reviewfont'>
-                    REVIEW
-                </div>
-                <div>
-                    <spna>&#8377;55.00</spna>
-                </div>
-                <div className='reviewfont'>
-                    Eirmod at est diam gubergren duo accusam elitr. Duo dolores ipsum clita ea elitr diam consetetur stet dolor, lorem amet.
-                </div>
-            </div>
-            <div className='cuisinesphoto'>
-                <img src={loginImage}></img>
-                <Button style={{width:"100%"}} variant="danger">Add</Button>
-            </div>
-        </div>
-        <hr></hr>
-        <div className='cuisines'>
-            <div className='cuisineitems'>
-                <div>
-                    <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
-                </div>
-                <div className='itemname'>
-                    Chatpata Tikki Filler Burger[Spicy]
-                </div>
-                <div className='reviewfont'>
-                    REVIEW
-                </div>
-                <div>
-                    <spna>&#8377;55.00</spna>
-                </div>
-                <div className='reviewfont'>
-                    Eirmod at est diam gubergren duo accusam elitr. Duo dolores ipsum clita ea elitr diam consetetur stet dolor, lorem amet.
-                </div>
-            </div>
-            <div className='cuisinesphoto'>
-                <img src={loginImage}></img>
-                <Button style={{width:"100%"}} variant="danger">Add</Button>
-            </div>
-        </div>
-        <hr></hr>
-        <div className='cuisines'>
-            <div className='cuisineitems'>
-                <div>
-                    <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
-                </div>
-                <div className='itemname'>
-                    Chatpata Tikki Filler Burger[Spicy]
-                </div>
-                <div className='reviewfont'>
-                    REVIEW
-                </div>
-                <div>
-                    <spna>&#8377;55.00</spna>
-                </div>
-                <div className='reviewfont'>
-                    Eirmod at est diam gubergren duo accusam elitr. Duo dolores ipsum clita ea elitr diam consetetur stet dolor, lorem amet.
-                </div>
-            </div>
-            <div className='cuisinesphoto'>
-                <img src={loginImage}></img>
-                <Button style={{width:"100%"}} variant="danger">Add</Button>
-            </div>
-        </div>
-        <hr></hr>
+    let navigate = useNavigate();
+    let location = useLocation();
+    const [menuItems, setMenuItems] = useState([]);
 
 
+    useEffect(() => {
+        menus()
+    }, []);
 
-        {/* Number of items */}
+    const menus = async () =>{
+         try {
+          let res = await fetch ("http://127.0.0.1:8000/restaurant/menu/category/", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                "resId": String(location.state.resId),
+                "category" : location.state.category
+              }),
+          });
+          let resJson = await res.json();
+          console.log(resJson)
+
+
+          if (res.status === 200) {
+            setMenuItems(resJson.data);
+            console.log(menuItems);
+            console.log("Working Fine.");
+
+          } else {
+            console.log("Not Working");
+          }
+         }
+         catch (err) {
+          console.log(err);
+         }
+
+    };
+
+    return (
+        <>
+            <div className='cuisinepage'>
+                {
+                    menuItems.map((item, i) => (
+                        <div key={i} className='cuisines'>
+
+                            <div className='cuisineitems'>
+                                <div>
+                                    <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
+                                </div>
+                                <div className='itemname'>
+                                    {item.foodName}
+                                </div>
+                                <div className='reviewfont'>
+                                    REVIEW
+                                </div>
+                                <div>
+                                    <span>&#8377;{item.price}.00</span>
+                                </div>
+                                <div className='reviewfont'>
+                                    {item.description}
+                                </div>
+                            </div>
+                            <div className='cuisinesphoto'>
+                                <img src={`http://127.0.0.1:8000${item.image}`} >{item.category}</img>
+                                <Button style={{ width: "100%" }} variant="warning" onClick={() => navigate('/individual', { state: {resId: location.state.resId, userId: location.state.userId, item:item, category: location.state.category} })}>Add</Button>
+                            </div>
+                        </div>
+                        )
+                    )    
+            }
+
+            {/* Number of items */}
         <div className='individualcard'>
-        {/* <h4 className='m-2'>Plain Dosa</h4>
-        <div className='m-2'>Dosa is a thin batter-based dish (usually plain) originating
-             from South India made from a fermented batter predominantly consisting of lentils and rice
-        </div>
-        <div className='additemdiv'>
-          <div><span className='leftplus'>+</span><span className='quantity'>1</span><span className='rightminus'>-</span></div>
-         <Button variant="dark" className='addbtn'>Add</Button>
-        </div> */}
-
         <div>
           <Button className='nextbtn' variant="warning">
             <div className='flexcol'>
             <div className='leftalign'>
               <div>
-                2 ITEMS
+                {location.state.totalQuantity} ITEMS
               </div>
               <div>
-                &#8377;275.00
+                &#8377;{location.state.totalPrice}.00
               </div>
             </div>
             <div className='rightalign'>
@@ -142,12 +98,14 @@ function CuisineItem() {
             </div>
           </Button>  
         </div>
-        
+
     </div>
-    </div>
-    </>
+
+                
+            </div>
+        </>
   
-  );
+    );
 }
 
 export default CuisineItem;

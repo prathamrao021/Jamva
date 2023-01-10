@@ -1,6 +1,9 @@
 import loginImage from './loginimage.png';
 import './App.css';
 import Button from 'react-bootstrap/Button';
+import { useLocation } from 'react-router';
+import { useState, useEffect } from 'react'
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import veg from './veg.jpg';
 import cuisine1 from './cuisine1.jpg';
@@ -8,74 +11,96 @@ import cuisine2 from './cuisine2.jpg';
 import cuisine3 from './cuisine3.jpg';
 
 function IndividualOrder() {
+  let navigate = useNavigate();
+  let location = useLocation();
+  const [counter, setCounter] = useState(1);
+  
+  const addItem=() =>{
+    let tempCount = counter;
+    tempCount += 1;
+    if (tempCount<=10){
+      setCounter(tempCount);
+    }
+  };
+
+  const subItem=() =>{
+    let tempCount = counter;
+    tempCount -= 1;
+    if (tempCount>=1){
+      setCounter(tempCount);
+    }
+  };
+  
+  const cartItem=async() =>{
+
+    try {
+      let res = await fetch ("http://127.0.0.1:8000/restaurant/order/", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "resId": location.state.resId,
+            "userId" : location.state.userId,
+            "foodId" : location.state.item.id,
+            "quantity": counter,
+            "price" : counter*location.state.item.price
+          }),
+      });
+
+      let resJson = await res.json();
+        console.log(resJson)
+
+        if (res.status === 200) {
+
+          console.log(location.state.category, location.state.resId);
+          navigate('/cuisine', { state: {totalPrice:resJson.data.totalPrice, totalQuantity:resJson.data.totalQuantity, resId: location.state.resId, userId: location.state.userId, category:location.state.category} })
+          console.log("Working Fine.");
+
+        } else {
+          console.log("Not Working");
+        }
+    }
+
+    catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <>
-    {/* <div className='individualcard'>
-        <h4 className='m-2'>Plain Dosa</h4>
-        <div className='m-2'>Dosa is a thin batter-based dish (usually plain) originating
-             from South India made from a fermented batter predominantly consisting of lentils and rice
+      <div className='separateorder'>
+        <div className='separateimage'>
+          <img src={`http://127.0.0.1:8000${location.state.item.image}`} ></img>
         </div>
-        <div className='additemdiv'>
-          <div><span className='leftplus'>+</span><span className='quantity'>1</span><span className='rightminus'>-</span></div>
-         <Button variant="dark" className='addbtn'>Add</Button>
-        </div>
-
         <div>
-          <Button className='nextbtn' variant="warning">
-            <div className='flexcol'>
-            <div className='leftalign'>
-              <div>
-                2 ITEMS
-              </div>
-              <div>
-                &#8377;275.00
-              </div>
-            </div>
-            <div className='rightalign'>
-              NEXT<FaArrowAltCircleRight style={{marginBottom:"auto", marginTop:"auto"}}/>
-            </div>
-            </div>
-          </Button>  
+          <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
         </div>
-        
-    </div> */}
-    <div className='separateorder'>
-      <div className='separateimage'>
-        <img src={cuisine2}></img>
+        <div className='itemname'>
+          {location.state.item.foodName}
+        </div>
+        <div className='reviewfont'>
+          REVIEW
+        </div>
+        <div className='reviewfont'>
+          {location.state.item.description}
+        </div>
       </div>
-      <div>
-        <img className='vegsym' src={veg}></img><span className='vegsym1'>Veg</span>
-      </div>
-      <div className='itemname'>
-        Chatpata Tikki Filler Burger[Spicy]
-      </div>
-      <div className='reviewfont'>
-        REVIEW
-      </div>
-      <div className='reviewfont'>
-        Et rebum et takimata dolor eirmod rebum at diam, erat no dolor dolor gubergren sit 
-        sed lorem no takimata. Aliquyam tempor consetetur justo elitr sit dolor et est aliquyam. 
-        Sed lorem nonumy tempor no, erat eos est tempor dolor aliquyam elitr et, duo duo diam sanctus elitr duo sanctus. No.
-      </div>
-    </div>
 
 
-    <div className='separateorder'>
-      <textarea className='separatedesc' placeholder='Customize according to your taste.'></textarea>
-      <div>Add On:</div>
-      <div ><input className='addons' type="checkbox"/><span className='reviewfont'>Green Chuteney</span><span className='rightsided'>&#8377; 20</span></div>
-      <div ><input className='addons' type="checkbox"/><span className='reviewfont'>Green Chuteney</span><span className='rightsided'>&#8377; 30</span></div>
-      <div ><input className='addons' type="checkbox"/><span className='reviewfont'>Green Chuteney</span><span className='rightsided'>&#8377; 30</span></div>
-      <div ><input className='addons' type="checkbox"/><span className='reviewfont'>Green Chuteney</span><span className='rightsided'>&#8377; 40</span></div>
-      <div ><input className='addons' type="checkbox"/><span className='reviewfont'>Green Chuteney</span><span className='rightsided'>&#8377; 50</span></div>
-
-    </div>
-    <div className='separateorder'>
-      <div className='additemdiv'>
-        <div className='addbtn1'><Button className='leftplus' variant='danger'>+</Button><span className='quantity'>1</span><Button className='rightminus' variant='danger'>-</Button></div>
-        <Button variant="danger" className='addbtn' style={{display:"flex"}}><span style={{flex:"50%"}}>Add</span><span style={{flex:"50%"}}>&#8377;150</span></Button>
+      <div className='separateorder'>
+        <textarea className='separatedesc' placeholder='Customize according to your taste.'></textarea>
       </div>
-    </div>
+
+      <div className='separateorder'>
+        <div className='additemdiv'>
+          <div className='addbtn1'>
+            <Button className='leftplus' onClick={subItem} variant='danger'>-</Button>
+            <span className='quantity'>{counter}</span>
+            <Button className='rightminus' onClick={addItem} variant='danger'>+</Button>
+          </div>
+          <Button variant="danger" className='addbtn' style={{display:"flex"}} onClick={cartItem}><span style={{flex:"50%"}}>Add</span><span style={{flex:"50%"}}>&#8377;{counter * location.state.item.price}</span></Button>
+        </div>
+              
+      </div>
     </>
   
   );

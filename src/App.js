@@ -40,7 +40,7 @@ function App() {
         <Route path='/' element={reg}/>
         <Route path='/home' element={<><NavBar/> <Home/></>}/>
         <Route path='/cuisine' element={<><NavBar/> <Cuisine/></>}/>
-        <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>
+        <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>        
         <Route path='/desc' element={<><NavBar/> <Description/> <TotalToKitchen/></>}/>
         <Route path='/bill' element={<><NavBar/> <Bill/> <Makepayment/></>}/>
         <Route path='/feedback' element={<><NavBar/> <Home/></>}/>

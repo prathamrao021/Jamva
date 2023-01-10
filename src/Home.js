@@ -18,7 +18,6 @@ function Home() {
 
     useEffect (()=>{
         categori()
-        console.log(category)
     }, []);
 
 
@@ -36,10 +35,6 @@ function Home() {
 
       if (res.status === 200) {
         console.log("Working Fine.");
-        // for(let i=0; i<resJson.data.length; i++){
-        //     arr.push(resJson.data[i].category);
-        //     console.log(resJson.data[i].category);
-        // }
         setCategory(resJson.data);
         console.log(category );
       } else {
@@ -108,13 +103,14 @@ function Home() {
     {
 
         category.map((item, i) => (
-        <div key={i} className='cuisinecard'>
+            <div key={i} className='cuisinecard'>
 
-            <div className='cuisinesphoto' style={{background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(http://127.0.0.1:8000${item.catImage})`, backgroundPosition: '0px', backgroundSize: 'cover'}} onClick={navigate(`/cuisine`, {state:{resId:1, userId: userId, category: item.category}})}>{item.category}</div>
-        </div>
+                <div className='homephoto' style={{ background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(http://127.0.0.1:8000${item.catImage})`, backgroundPosition: '0px', backgroundSize: 'cover' }} onClick={() => navigate('/cuisine', { state: { category: item.category, resId: location.state.resId, userId: location.state.userId} })}>{item.category}</div>
+                
+            </div>
             )
         )
-    }    
+     }
     </div>
    
     
@@ -123,6 +119,5 @@ function Home() {
   
   );
 }
-
 
 export default Home;
