@@ -5,19 +5,19 @@ import NavBar from './Navabar';
 import Home from './Home';
 import Feedback from './Feedback';
 import Cuisine from './CuisineItem';
-import Individual from './IndividualOrder';
 import Description from './Description';
 import TotalToKitchen from './TotalToKitchen';
 import Bill from './Bill';
 import Makepayment from './Makepayment';
 import {useState} from 'react';
-
+import IndividualOrder from './IndividualOrder';
 import { 
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-import IndividualOrder from './IndividualOrder';
+import Loader from './Loader';
+
 
 
 function App() {
@@ -43,8 +43,8 @@ function App() {
         <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>        
         <Route path='/desc' element={<><NavBar/> <Description/> <TotalToKitchen/></>}/>
         <Route path='/bill' element={<><NavBar/> <Bill/> <Makepayment/></>}/>
-        <Route path='/feedback' element={<><NavBar/> <Home/></>}/>
-        <Route path='/contact' element={<><NavBar/> <Home/></>}/>
+        <Route path='/feedback' element={<><NavBar/><Feedback/></>}/>
+        <Route path='/contact' element={<><NavBar/><Loader/></>}/>
       </Routes>
     </BrowserRouter>
     {/* <NavBar/> */}

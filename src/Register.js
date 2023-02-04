@@ -68,7 +68,6 @@ function Register() {
           {
             count -= 1;
             setSeconds(count);
-            console.log(count);
           } 
           else{
             clearInterval(id);

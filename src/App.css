@@ -1,6 +1,7 @@
 
 .App {
   text-align: center;
+  vertical-align: middle;
 }
 
 .App-logo {
@@ -76,6 +77,7 @@
   flex-basis: 25%;
   flex-grow: 0;
   flex-shrink: 0;
+  justify-content: center;
 }
 
 .trending{
@@ -84,18 +86,30 @@
   flex-direction: row;
   flex-wrap: nowrap;
   overflow: auto;
-  margin-top: 20px;
+  padding-top: 20px;
 }
 
 .cuisinepage{
   position: relative;
   margin-left: 1rem;
   margin-right: 1rem;
-  min-height: 86vh;
+  min-height: 78.2vh;
+}
+
+.floatingcat{
+  display: flex;
+  justify-items: center;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .cuisines{
-  border-bottom: black solid;
+  border-bottom: 1px solid gray;
   display: flex;
   flex-wrap: nowrap;
 }
@@ -115,6 +129,11 @@
   font-size: 4vw;
 }
 
+.flex{
+  display: flex;
+  justify-content: space-around;
+  flex: 50%;
+}
 
 .cuisinesphoto{
   flex: 40%;
@@ -186,6 +205,10 @@
   margin-right: 10px;
   border-radius: 32px !important;
   width: 40%;
+}
+
+.addbtn1{
+  margin: auto;
 }
 
 .additemdiv{
@@ -330,6 +353,53 @@
   border-radius: 30pc;
   height: 300px;
   margin-top: 20px;
+}
+
+.loader{
+  display: flex;
+  justify-content: center;
+  size: 1vh;
+  height: 100vh;
+  align-items: center;
+}
+
+.loader >img{
+  height: 23vh;
+}
+
+.tableno{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  padding: 20px;
+}
+
+.cardbill{
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.carditem{
+  display: flex;
+  flex-wrap: wrap;
+  flex: 50%;
+  justify-content: space-between;
+}
+
+.individualordercard{
+  border-radius: 20px !important;
+  overflow: hidden;
+  margin-bottom: 25px;
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px){
+  .cardbill{
+  width: 30%;
+  }
 }
 
 @keyframes App-logo-spin {
