@@ -8,9 +8,11 @@ import man from './man.png';
 import Feedback from './Feedback';
 import name from "./Register";
 import { useLocation } from 'react-router';
+import {useNavigate} from "react-router-dom";
 import { useState } from 'react'
 
 function NavBar() {
+  let navigate = useNavigate();
   let location = useLocation();
   const [resName, setresName] = useState([])
 
@@ -39,8 +41,8 @@ return (
   <>
   <Navbar onLoad={details} className="navbar" expand="lg">
     <Container>
-    <Navbar.Brand><img style={{width:"7vh"}} src={man}></img></Navbar.Brand>
-      <Navbar.Brand id="resName" navigate="#home">{resName}</Navbar.Brand>
+    <Navbar.Brand><img style={{width:"40px"}} src={man}></img></Navbar.Brand>
+      <Navbar.Brand id="resName" navigate="#home" onClick={() =>navigate("/home", {state: {resId: location.state.resId}})}>{resName}</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">

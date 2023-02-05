@@ -16,7 +16,7 @@ function Home() {
   let navigate = useNavigate();
   let location = useLocation();
   const [category, setCategory] = useState([]);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     categori();
@@ -41,7 +41,7 @@ function Home() {
         setCategory(resJson.data);
         console.log(category);
         setTimeout(setLoad(false), 5000);
-        
+
 
       } else {
         console.log("Not Working");
@@ -75,12 +75,13 @@ function Home() {
   };
 
   const viewhome = (
-    <div>
-      <h3 className="m-2">Trending</h3>
-      <div className="m-1 trending">
-        <Card className="cardholder">
-          <Card.Img variant="top" src={man} />
-          {/* <Card.Body>
+    <div class="home_main">
+      <div class="trends">
+        <h3 className="m-2">Trending</h3>
+        <div className="m-1 trending">
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -88,11 +89,11 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-        </Card>
+          </Card>
 
-        <Card className="cardholder">
-          <Card.Img variant="top" src={login} />
-          {/* <Card.Body>
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -100,11 +101,11 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-        </Card>
+          </Card>
 
-        <Card className="cardholder">
-          <Card.Img variant="top" src={man} />
-          {/* <Card.Body>
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -112,12 +113,46 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-        </Card>
+          </Card>
 
-        <Card className="cardholder">
-          <Card.Img variant="top" src={login} />
-        </Card>
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+
+          <Card className="cardholder">
+            <Card.Img variant="top" src={login} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+        </div>
       </div>
+      <div class="cuisine_home">
       <h3 className="m-2">Cuisines</h3>
       <div>
         {category.map((item, i) => (
@@ -144,13 +179,66 @@ function Home() {
           </div>
         ))}
       </div>
+      </div>
+      <div class="recent_orders">
+        <h3 className="m-2" >Recently Ordered</h3>
+        <div className="m-1 trending">
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+
+          <Card className="cardholder">
+            <Card.Img variant="top" src={login} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+          
+          <Card className="cardholder">
+            <Card.Img variant="top" src={man} />
+            {/* <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body> */}
+          </Card>
+        </div>          
+      </div>
     </div>
   );
 
   return (
-  <>
-  {load ? <Loader/>: viewhome}
-  </>
+    <>
+      {load ? <Loader /> : viewhome}
+    </>
   );
 }
 
