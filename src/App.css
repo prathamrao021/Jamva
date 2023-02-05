@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Barlow+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
 
 .App {
   text-align: center;
@@ -13,6 +16,13 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+  :root{
+    background-color: #A61C3C;
+  }
+}
+
+#root{
+  background-color: #A61C3C;
 }
 
 .App-header {
@@ -66,9 +76,47 @@
   max-height: 80px;
 }
 
+.navbar-brand{
+  border: solid 2px #fffdd0;
+  border-radius: 50px;
+}
+
+.me-auto{
+  color: #1D1A05;
+  font-style: italic;
+}
+
+
+#basic-navbar-nav{
+  background-color: #FFFDD0 !important;
+}
+
+#resName{
+  color: #FFFDD0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  border: none;
+}
+
 .navbar{
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background-color: #1D1A05;
+  position: sticky;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.container button{
+  background : #FFFDD0;
+}
+.m-2{
+  font-family: 'Courgette', cursive;
+  font-size: 7vw;
+}
+
+.trends{
+  position: relative;
+  margin: 2px;
 }
 
 .cardholder{
@@ -80,20 +128,105 @@
   justify-content: center;
 }
 
+.home_main{
+  font-family: 'Bree Serif', serif;
+  background-color: #FFFDD0;
+  position: relative;
+  top: 60px;
+}
+
 .trending{
   align-items: stretch;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   overflow: auto;
-  padding-top: 20px;
+  margin-bottom: 10px !important;
 }
 
-.cuisinepage{
-  position: relative;
-  margin-left: 1rem;
-  margin-right: 1rem;
+.cuisine_home{
+  color: #FFFDD0;
+  background-color: #A61C3C;
+  margin:0px;
+  padding:5px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  box-sizing: border-box;
+  border-bottom: none;
+}
+
+.cuisinepage {
+  font-family: 'Sawarabi Gothic', sans-serif;
+  background-color: #FFFDD0;
+  position: absolute;
+  top: 144px;
+  width: -webkit-fill-available;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin:0px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   min-height: 78.2vh;
+}
+
+.recent_orders {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  position: absolute;
+  right: 0px;
+  display: inline-block;
+  left: 40px;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  background-color: #FFFDD0;
+}
+
+.categories{
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: auto;
+  padding-top: 20px;
+  width: 100%;
+  text-align-last:center;
+  position: sticky;
+  box-sizing: border-box;
+  text-align:justify;
+  top: 0;
+  padding: 5px;
+  background-color: #FFFDD0;
+}
+
+.categories > button{
+  position: sticky;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #1D1A05;
+  background-color: #A61C3C;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+}
+
+.categories > button:active {
+  background-color: #7f162f;
+  transform: translateY(5px);
+}
+
+.categories > button:focus,
+.categories > button:hover {
+  background-color: #621224;
+  box-shadow: none;
+}
+
+.categories button:active:focus{
+  box-shadow: none;
 }
 
 .floatingcat{
@@ -104,20 +237,20 @@
   margin-bottom: 20px;
   padding: 5px;
 }
-body::-webkit-scrollbar {
-  display: none;
-}
 
-.cuisines{
-  border-bottom: 1px solid gray;
+.cuisines {
+  color: #FFFDD0;
   display: flex;
   flex-wrap: nowrap;
+  background-color: #A61C3C;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  padding: 10px;
 }
 
 .homephoto{
   height: 20vw;
   object-fit: cover;
-  /* background: linear-gradient(to right, black, rgba(255, 255, 255, 0)), url(./cuisine1.jpg); */
   background-position: 0px ;
   background-size: 400px;
   border-radius: 10px;
@@ -142,6 +275,19 @@ body::-webkit-scrollbar {
   max-height: 200px;
 }
 
+.cuisinesphoto button{
+  background-color: #FFFDD0;
+  color: black;
+}
+
+.cuisinesphoto button:focus:active,
+.cuisinesphoto button:focus,
+.cuisinesphoto button:active,
+.cuisinesphoto button:hover{
+  background-color: #c8c7aa;
+  color: black;
+}
+
 .cuisinesphoto img{
   object-fit: cover;  
   max-width: 80%;
@@ -164,12 +310,13 @@ body::-webkit-scrollbar {
 }
 
 .reviewfont{
-  font-size: 10px;
+  font-size:small;
   margin-bottom: 10px;
 }
 
 .itemname{
   font-weight: 500;
+  font-size: large;
 }
 
 .cuisineitems{
@@ -183,15 +330,20 @@ body::-webkit-scrollbar {
 }
 
 .individualcard{
-  position: sticky;
+  background-color: #FFFDD0;
+  position: fixed;
   bottom: 0;
   border: 1px solid gray;
-  background: white;
   box-shadow: 0px -2px 10px;
   padding: 3px;
+  border: none;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width: 100%;
+}
+
+.individualcard button{
+  background-color: #A61C3C;
 }
 
 .nextbtn{
@@ -368,10 +520,12 @@ body::-webkit-scrollbar {
 }
 
 .tableno{
+  font-family: 'Courgette';
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: white;
+  background-color: #1D1A05;
+  color: #FFFDD0;
   padding: 20px;
 }
 
