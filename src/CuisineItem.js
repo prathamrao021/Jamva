@@ -137,12 +137,10 @@ function CuisineItem() {
           </span>
         ))} */}
 
-        <div className="trending">
+        <div className="categories">
           {category.map((items, i) => (
             <>
               <Button
-                className="cardholder floatingcat"
-                variant="outline-warning"
                 onClick={() => {
                   location.state.category = items.category;
                   menus();
@@ -160,6 +158,7 @@ function CuisineItem() {
       </div>
 
       <div className="cuisinepage">
+        <h3 class="m-2">{location.state.category}</h3>
         {menuItems.map((item, i) => (
           <div key={i} className="cuisines">
             <div className="cuisineitems">
