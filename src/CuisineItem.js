@@ -149,9 +149,14 @@ function CuisineItem() {
                 {items.category}
               </Button>
               {/* <div className="cardholder floatingcat">Continental</div> */}
-              {/* <div className="cardholder">Cocktail</div>
-            <div className="cardholder">Pizza</div>
-            <div className="cardholder">Sabzi</div> */}
+              <Button
+                onClick={() => {
+                  location.state.category = items.category;
+                  menus();
+                }}
+              >
+                {items.category}
+              </Button>
             </>
           ))}
         </div>
