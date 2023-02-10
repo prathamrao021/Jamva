@@ -9,8 +9,7 @@ import cuisine3 from "./cuisine3.jpg";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import Loader from './Loader';
-
+import Loader from "./Loader";
 
 function Home() {
   let navigate = useNavigate();
@@ -41,8 +40,6 @@ function Home() {
         setCategory(resJson.data);
         console.log(category);
         setTimeout(setLoad(false), 5000);
-
-
       } else {
         console.log("Not Working");
       }
@@ -77,7 +74,7 @@ function Home() {
   const viewhome = (
     <div class="home_main">
       <div class="trends">
-        <h3 className="m-2">Trending</h3>
+        <h3 className="m2">Trending</h3>
         <div className="m-1 trending">
           <Card className="cardholder">
             <Card.Img variant="top" src={man} />
@@ -153,39 +150,41 @@ function Home() {
         </div>
       </div>
       <div class="cuisine_home">
-      <h3 className="m-2">Cuisines</h3>
-      <div>
-        {category.map((item, i) => (
-          <div key={i} className="cuisinecard">
-            <div
-              className="homephoto"
-              style={{
-                background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(http://127.0.0.1:8000${item.catImage})`,
-                backgroundPosition: "0px",
-                backgroundSize: "cover",
-              }}
-              onClick={() =>
-                navigate("/cuisine", {
-                  state: {
-                    category: item.category,
-                    resId: location.state.resId,
-                    userId: location.state.userId,
-                  },
-                })
-              }
-            >
-              {item.category}
+        <h3 className="m2">Cuisines</h3>
+        <div>
+          {category.map((item, i) => (
+            <div key={i} className="cuisinecard">
+              <div
+                className="homephoto"
+                style={{
+                  background: `linear-gradient(90deg, black, rgba(255, 255, 255, 0), black), url(http://127.0.0.1:8000${item.catImage})`,
+                  backgroundPosition: "0px",
+                  backgroundSize: "cover",
+                }}
+                onClick={() =>
+                  navigate("/cuisine", {
+                    state: {
+                      category: item.category,
+                      resId: location.state.resId,
+                      userId: location.state.userId,
+                    },
+                  })
+                }
+              >
+                {item.category}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      </div>
+
       <div class="recent_orders">
-        <h3 className="m-2" >Recently Ordered</h3>
-        <div className="m-1 trending">
-          <Card className="cardholder">
-            <Card.Img variant="top" src={man} />
-            {/* <Card.Body>
+        <div>
+          <h3 className="m2">Recently Ordered</h3>
+          <div className="m-1 trending">
+            <Card className="cardholder">
+              <Card.Img variant="top" src={man} />
+              {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -193,11 +192,11 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-          </Card>
+            </Card>
 
-          <Card className="cardholder">
-            <Card.Img variant="top" src={login} />
-            {/* <Card.Body>
+            <Card className="cardholder">
+              <Card.Img variant="top" src={login} />
+              {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -205,11 +204,11 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-          </Card>
+            </Card>
 
-          <Card className="cardholder">
-            <Card.Img variant="top" src={man} />
-            {/* <Card.Body>
+            <Card className="cardholder">
+              <Card.Img variant="top" src={man} />
+              {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -217,11 +216,11 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-          </Card>
-          
-          <Card className="cardholder">
-            <Card.Img variant="top" src={man} />
-            {/* <Card.Body>
+            </Card>
+
+            <Card className="cardholder">
+              <Card.Img variant="top" src={man} />
+              {/* <Card.Body>
             <Card.Title>Card Title</Card.Title>
             <Card.Text>
             Some quick example text to build on the card title and make up the
@@ -229,17 +228,14 @@ function Home() {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button>
         </Card.Body> */}
-          </Card>
-        </div>          
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
 
-  return (
-    <>
-      {load ? <Loader /> : viewhome}
-    </>
-  );
+  return <>{load ? <Loader /> : viewhome}</>;
 }
 
 export default Home;
