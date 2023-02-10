@@ -42,7 +42,7 @@ function App() {
         <Route path='/cuisine' element={<><NavBar/> <Cuisine/></>}/>
         <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>        
         <Route path='/desc' element={<><NavBar/> <Description/> <TotalToKitchen/></>}/>
-        <Route path='/bill' element={<><NavBar/> <Bill/> <Makepayment/></>}/>
+        <Route path='/bill' element={<><NavBar/> <Bill/></>}/>
         <Route path='/feedback' element={<><NavBar/><Feedback/></>}/>
         <Route path='/contact' element={<><NavBar/><Loader/></>}/>
       </Routes>

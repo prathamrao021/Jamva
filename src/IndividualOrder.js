@@ -8,7 +8,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import veg from "./veg.jpg";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import cuisine1 from './cuisine1.jpg'
+import cuisine1 from "./cuisine1.jpg";
 function IndividualOrder() {
   let navigate = useNavigate();
   let location = useLocation();
@@ -63,6 +63,16 @@ function IndividualOrder() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const backtomenu = () =>{
+    navigate("/cuisine", {
+      state: {
+        resId: location.state.resId,
+        userId: location.state.userId,
+        category: location.state.category,
+      },
+    });
   };
 
   return (
@@ -129,20 +139,16 @@ function IndividualOrder() {
             </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item style={{display: "flex"}}>
+            <ListGroup.Item style={{ display: "flex" }}>
               <div className="addbtn1">
                 <b>Quantity:</b>
-                <Button className="leftplus" onClick={subItem} variant="danger">
+                <button className="leftplus" onClick={subItem}>
                   -
-                </Button>
+                </button>
                 <span className="quantity">{counter}</span>
-                <Button
-                  className="rightminus"
-                  onClick={addItem}
-                  variant="danger"
-                >
+                <button className="rightminus" onClick={addItem}>
                   +
-                </Button>
+                </button>
               </div>
             </ListGroup.Item>
             <ListGroup.Item>
@@ -155,16 +161,22 @@ function IndividualOrder() {
               <b>Price:</b> &#8377; 250.00
             </ListGroup.Item>
           </ListGroup>
-        </Card>
-        <Card className="individualordercard">
           <Card.Body style={{ display: "flex", flexGrow: "0" }}>
             {/* <Card.Link href="#">Card Link</Card.Link>
               <Card.Link href="#">Another Link</Card.Link> */}
             <div className="flex">
-              <Button style={{ width: "45%" }} variant="danger">
+              <Button
+                style={{ width: "45%" }}
+                variant="danger"
+                onClick={backtomenu}
+              >
                 Back to Menu
               </Button>
-              <Button style={{ width: "45%" }} variant="warning" onClick={cartItem}>
+              <Button
+                style={{ width: "45%" }}
+                variant="warning"
+                onClick={cartItem}
+              >
                 Add
               </Button>
             </div>

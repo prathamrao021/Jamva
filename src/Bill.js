@@ -48,6 +48,16 @@ function Bill() {
     }
   };
 
+  const backtomenu = () =>{
+    navigate("/home", {
+      state: {
+        resId: location.state.resId,
+        userId: location.state.userId,
+        category: location.state.category,
+      },
+    });
+  };
+
   return (
     <>
       <Form className="tableno">
@@ -93,7 +103,10 @@ function Bill() {
       <div className="carditem container">
         {items.map((item, i) => (
           <Card className="cardbill">
-            <Card.Img variant="top" src={`http://127.0.0.1:8000${item.image}`} />
+            <Card.Img
+              variant="top"
+              src={`http://127.0.0.1:8000${item.image}`}
+            />
             <Card.Body>
               <Card.Title>{item.foodName}</Card.Title>
               <div>
@@ -104,9 +117,11 @@ function Bill() {
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroup.Item>Quantity: {items1[i].quantity}</ListGroup.Item>
-              <ListGroup.Item>Price: &#8377; {item.price*items1[i].quantity}.00</ListGroup.Item>
+              <ListGroup.Item>
+                Price: &#8377; {item.price * items1[i].quantity}.00
+              </ListGroup.Item>
             </ListGroup>
-            <Card.Body style={{display: "flex", flexGrow: "0" }}>
+            <Card.Body style={{ display: "flex", flexGrow: "0" }}>
               {/* <Card.Link href="#">Card Link</Card.Link>
               <Card.Link href="#">Another Link</Card.Link> */}
               <div className="flex">
@@ -121,6 +136,20 @@ function Bill() {
           </Card>
         ))}
       </div>
+      <div className="individualcard">
+          <div className="flex m-1">
+            <h5>Total Payment</h5>
+            <p>&#8377; 2000.00</p>
+          </div>
+          <div className="flex">
+            <Button style={{ width: "45%" }} variant="warning" onClick={backtomenu}>
+              Back to Menu
+            </Button>
+            <Button style={{ width: "45%" }} variant="success">
+              Pay to Order
+            </Button>
+          </div>
+        </div>
     </>
   );
 }

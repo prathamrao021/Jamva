@@ -182,7 +182,6 @@ function CuisineItem() {
               <img src={`http://127.0.0.1:8000${item.image}`}></img>
               <Button
                 style={{ width: "100%" }}
-                variant="warning"
                 onClick={() =>
                   navigate("/individual", {
                     state: {
@@ -202,6 +201,7 @@ function CuisineItem() {
 
         {/* Number of items */}
       </div>
+      <div className="temporary"></div>
 
       {/* <div className="individualcard">
         <div>
