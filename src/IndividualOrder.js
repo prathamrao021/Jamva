@@ -9,10 +9,18 @@ import veg from "./veg.jpg";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import cuisine1 from "./cuisine1.jpg";
+
+
 function IndividualOrder() {
   let navigate = useNavigate();
   let location = useLocation();
+
+  const [foodItem, setFoodItem] = useState([]);
   const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    setFoodItem(location.state.item);
+  },[])
 
   const addItem = () => {
     let tempCount = counter;
@@ -30,6 +38,7 @@ function IndividualOrder() {
     }
   };
 
+  console.log(foodItem);
   const cartItem = async () => {
     try {
       let res = await fetch("http://127.0.0.1:8000/restaurant/order/", {
@@ -77,65 +86,20 @@ function IndividualOrder() {
 
   return (
     <>
-      {/* <div className="separateorder">
-        <div className="separateimage">
-          <img src={`http://127.0.0.1:8000${location.state.item.image}`}></img>
-        </div>
-        <div>
-          <img className="vegsym" src={veg}></img>
-          <span className="vegsym1">Veg</span>
-        </div>
-        <div className="itemname">{location.state.item.foodName}</div>
-        <div className="reviewfont">REVIEW</div>
-        <div className="reviewfont">{location.state.item.description}</div>
-      </div>
-
-      <div className="separateorder">
-        <textarea
-          className="separatedesc"
-          placeholder="Customize according to your taste."
-        ></textarea>
-      </div>
-
-      <div className="separateorder">
-        <div className="additemdiv">
-          <div className="addbtn1">
-            <Button className="leftplus" onClick={subItem} variant="danger">
-              -
-            </Button>
-            <span className="quantity">{counter}</span>
-            <Button className="rightminus" onClick={addItem} variant="danger">
-              +
-            </Button>
-          </div>
-          <Button
-            variant="danger"
-            className="addbtn"
-            style={{ display: "flex" }}
-            onClick={cartItem}
-          >
-            <span style={{ flex: "50%" }}>Add</span>
-            <span style={{ flex: "50%" }}>
-              &#8377;{counter * location.state.item.price}
-            </span>
-          </Button>
-        </div>
-      </div> */}
-
       {/* Card */}
       <div className="individualdiv container">
+      {/* {foodItem.map((items, i) => ( */}
         <Card className="individualordercard">
-          <Card.Img variant="top" src={cuisine1} />
+          <Card.Img variant="top" src={`http://127.0.0.1:8000${foodItem.image}`} />
           <Card.Body>
-            <Card.Title>Dosa</Card.Title>
+            <Card.Title>{foodItem.foodName}</Card.Title>
             <div>
               <img className="vegsym" src={veg}></img>
               <span className="vegsym1">Veg</span>
             </div>
-            <div className="reviewfont">REVIEW</div>
+            <div className="reviewfont">RATINGS : {foodItem.ratings}</div>
             <Card.Text>
-              Vero et dolores ipsum sit voluptua eos sit eirmod magna, no stet
-              erat dolores lorem dolor duo labore ipsum dolor..
+              {foodItem.description}
             </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
@@ -158,7 +122,7 @@ function IndividualOrder() {
               ></textarea>
             </ListGroup.Item>
             <ListGroup.Item>
-              <b>Price:</b> &#8377; 250.00
+              <b>Price:</b> &#8377; {foodItem.price}.00
             </ListGroup.Item>
           </ListGroup>
           <Card.Body style={{ display: "flex", flexGrow: "0" }}>
@@ -182,6 +146,7 @@ function IndividualOrder() {
             </div>
           </Card.Body>
         </Card>
+      {/* ))}; */}
       </div>
     </>
   );

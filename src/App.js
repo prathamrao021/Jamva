@@ -37,6 +37,7 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
+        <Route path='/:resId' element={reg}/>
         <Route path='/' element={reg}/>
         <Route path='/home' element={<><NavBar/> <Home/></>}/>
         <Route path='/cuisine' element={<><NavBar/> <Cuisine/></>}/>

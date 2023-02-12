@@ -15,6 +15,7 @@ function Register() {
   const [otp, setOTP] = useState("");
   const [user, setUser] = useState("");
   let [seconds, setSeconds] = useState(60);
+  let params = useParams();
   const [disable1, setDisable1] = useState(false);
   const [disable2, setDisable2] = useState(true);
   let myInterval;
@@ -35,7 +36,8 @@ function Register() {
       let resJson = await res.json();
       if (res.status === 200) {
         setMessage("User created successfully");
-        navigate(`/home`, { state: { resId: 1, userId: user } });
+        console.log(params.resId)
+        navigate(`/home`, { state: { resId: String(params.resId), userId: user } });
       } else {
         setMessage("Some error occured");
       }
