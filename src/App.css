@@ -162,7 +162,7 @@ body {
   margin-top: 30px;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  min-height: 66.5vh;
+  min-height: calc(100% - 211px);
 }
 
 .recent_orders {
