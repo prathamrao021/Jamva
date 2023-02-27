@@ -72,8 +72,8 @@ function Home() {
   };
 
   const viewhome = (
-    <div class="home_main">
-      <div class="trends">
+    <div className="home_main">
+      <div className="trends">
         <h3 className="m2">Trending</h3>
         <div className="m-1 trending">
           <Card className="cardholder">
@@ -149,7 +149,7 @@ function Home() {
           </Card>
         </div>
       </div>
-      <div class="cuisine_home">
+      <div className="cuisine_home">
         <h3 className="m2">Cuisines</h3>
         <div>
           {category.map((item, i) => (
@@ -178,7 +178,7 @@ function Home() {
         </div>
       </div>
 
-      <div class="recent_orders">
+      <div className="recent_orders">
         <div>
           <h3 className="m2">Recently Ordered</h3>
           <div className="m-1 trending">

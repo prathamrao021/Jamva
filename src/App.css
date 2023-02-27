@@ -39,10 +39,6 @@ body {
   color: rgb(0, 0, 0);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .leftalign {
   flex: 50%;
   display: flex;
@@ -80,32 +76,31 @@ body {
 }
 
 .navbar-brand {
-  border: solid 2px #fffdd0;
   border-radius: 50px;
 }
 
 .me-auto {
-  color: #fffdd0 !important;
+  color: var(--light) !important;
   font-style: italic;
 }
 
 .nav-link {
-  color: #fffdd0 !important;
+  color: var(--light) !important;
 }
 
 #basic-navbar-nav {
-  background-color: #1d1a05 !important;
+  background-color: var(--dark) !important;
 }
 
 #resName {
-  color: #fffdd0;
+  color: var(--light);
   font-family: "Barlow Condensed", sans-serif;
   font-size: 30px;
   border: none;
 }
 
 .navbar {
-  background-color: #1d1a05;
+  background-color: var(--dark);
   position: sticky;
   width: 100%;
   z-index: 1;
@@ -113,11 +108,36 @@ body {
 }
 
 .container button {
-  background: #fffdd0;
+  background-color: var(--light);
+}
+
+.individual_btn {
+  padding: 17px 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: var(--red) !important;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: maroon 5px 5px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  width: 45%;
+  border: maroon !important;
+}
+
+.individual_btn:hover {
+  box-shadow: maroon 3px 3px 0px 0px;
+}
+
+.individual_btn:active {
+  background-color: var(--red);
+  box-shadow: maroon 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
 }
 
 .m2 {
-  font-family: "Courgette", cursive;
+  font-family: "Aboreto", cursive;
   padding-left: 10px;
   font-size: 25px;
   padding-top: 5px;
@@ -134,7 +154,7 @@ body {
 
 .home_main {
   font-family: "Bree Serif", serif;
-  background-color: #fffdd0;
+  background-color: var(--light);
 }
 
 .trending {
@@ -147,8 +167,8 @@ body {
 }
 
 .cuisine_home {
-  color: #fffdd0;
-  background-color: #a61c3c;
+  color: var(--light);
+  background-color: var(--red);
   padding: 5px;
   border-top-left-radius: 35px;
   border-top-right-radius: 35px;
@@ -156,13 +176,13 @@ body {
 
 .cuisinepage {
   font-family: "Sawarabi Gothic", sans-serif;
-  background-color: #fffdd0;
+  background-color: var(--light);
   padding-left: 1rem;
   padding-right: 1rem;
   margin-top: 30px;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  min-height: calc(100% - 211px);
+  min-height: calc(100vh - 158px);
 }
 
 .recent_orders {
@@ -191,15 +211,15 @@ body {
   text-align: justify;
   top: 0;
   padding: 5px;
-  background-color: #fffdd0;
+  background-color: var(--light);
   z-index: 2;
 }
 
-.categories > button {
+.categories div > button {
   position: sticky;
   margin-left: 5px;
-  color: #fffdd0 !important;
-  background-color: #a61c3c;
+  color: var(--light) !important;
+  background-color: var(--red);
   border: none;
   outline: none;
   padding: 10px 20px;
@@ -207,21 +227,21 @@ body {
   font-weight: 700;
   border-radius: 5px;
   transition: all ease 0.1s;
-  box-shadow: 2px 2px 0 #1d1a05;
+  box-shadow: 2px 2px 0 var(--dark);
 }
 
-.categories > button:active {
+.categories div > button:active {
   background-color: #7f162f;
   transform: translateY(5px);
 }
 
-.categories > button:focus,
-.categories > button:hover {
+.categories div > button:focus,
+.categories div > button:hover {
   background-color: #621224;
   box-shadow: none;
 }
 
-.categories button:active:focus {
+.categories div > button:active:focus {
   box-shadow: none;
 }
 
@@ -235,10 +255,10 @@ body {
 }
 
 .cuisines {
-  color: #fffdd0;
+  color: var(--light);
   display: flex;
   flex-wrap: nowrap;
-  background-color: #a61c3c;
+  background-color: var(--red);
   border-radius: 20px;
   margin-top: 5px;
   /* margin-bottom: 5px; */
@@ -338,7 +358,7 @@ body {
 }
 
 .individualcard {
-  background-color: #fffdd0;
+  background-color: var(--light);
   position: sticky;
   bottom: 0;
   border: 1px solid gray;
@@ -350,12 +370,29 @@ body {
   width: 100%;
 }
 
-.individualcard button {
-  background-color: #a61c3c;
+.makepaymentcard {
+  background-color: var(--light);
+  position: sticky;
+  bottom: 0;
+  border: 1px solid gray;
+  box-shadow: 0px -2px 10px;
+  padding: 3px;
+  border: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  padding-bottom: 10px;
 }
 
-.individualdiv{
-  padding-bottom: 1pxca;
+.individualcard button {
+  background-color: var(--red);
+  color: var(--light);
+}
+
+.individualdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nextbtn {
@@ -562,8 +599,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #1d1a05;
-  color: #fffdd0;
+  background-color: var(--dark);
+  color: var(--light);
   padding: 20px;
 }
 
@@ -575,8 +612,8 @@ body {
 .carditem {
   display: flex;
   flex-wrap: wrap;
-  flex: 50%;
   justify-content: space-around;
+  padding-top: 10px;
 }
 
 .individualordercard {
@@ -591,13 +628,276 @@ body {
 }
 .list-group-flush > .list-group-item {
   border-width: 0 0 var(--bs-list-group-border-width);
-  background-color: var(--light);
+  background-color: white;
 }
+
+.paymenttypecard {
+  --primary-clr: var(--dark);
+  --dot-clr: var(--light);
+  --play: var(--light);
+  width: 100%;
+  height: 170px;
+  border-radius: 10px;
+ }
+ 
+ .paymenttypecard {
+  font-family: "Arial";
+  color: #fff;
+  display: grid;
+  cursor: pointer;
+  grid-template-rows: 50px 1fr;
+  margin: 20px 10px;
+  box-shadow: 10px 10px 20px var(--dark);
+  max-width: -webkit-fill-available;
+ }
+ 
+ .paymenttypecard:active .img-section {
+  transform: translateY(1em);
+ }
+
+ .paymenttypecard:hover .img-section {
+  box-shadow: 5px 5px 20px var(--dark);
+
+ }
+ 
+ .card-desc {
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  top: -10px;
+  display: grid;
+  gap: 10px;
+  background: var(--primary-clr);
+ }
+ 
+ .card-time {
+  font-size: 1.7em;
+  font-weight: 500;
+ }
+ 
+ .img-section {
+  transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: var(--light);
+ }
+ 
+ .card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+ }
+ 
+ .card-title {
+  flex: 1;
+  font-size: 0.9em;
+  font-weight: 500;
+ }
+ 
+ .card-menu {
+  display: flex;
+  gap: 4px;
+  margin-inline: auto;
+ }
+ 
+ .paymenttypecard svg {
+  float: right;
+  max-width: 100%;
+  max-height: 100%;
+  color: var(--dark);
+ }
+ 
+ .paymenttypecard .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dot-clr);
+ }
+ 
+ .paymenttypecard .recent {
+  line-height: 0;
+  font-size: 0.8em;
+ }
+
+.pay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calcheight{
+  height: calc(100vh - 158px);
+}
+
+
+/* Card Payment */
+.card{
+  height: 190px;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective:600px;
+    
+  }
+  
+  .card__part{
+    box-shadow: 1px 1px #aaa3a3;
+      top: 0;
+    position: absolute;
+  z-index: 1000;
+    left: 0;
+    display: inline-block;
+      width: 320px;
+      height: 190px;
+      background-image: url('https://image.ibb.co/bVnMrc/g3095.png'), linear-gradient(to right bottom, #fd696b, #fa616e, #f65871, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-radius: 8px;
+     
+      -webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -ms-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+  }
+  
+  .card__front{
+    padding: 18px;
+  -webkit-transform: rotateY(0);
+  -moz-transform: rotateY(0);
+  }
+  
+  .card__back {
+    padding: 18px 0;
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  }
+  
+  .card__black-line {
+      margin-top: 5px;
+      height: 38px;
+      background-color: #303030;
+  }
+  
+  .card__logo {
+      height: 16px;
+  }
+  
+  .card__front-logo{
+        position: absolute;
+      top: 18px;
+      right: 18px;
+  }
+  .card__square {
+      border-radius: 5px;
+      height: 30px;
+  }
+  
+  .card_numer {
+      display: block;
+      width: 100%;
+      word-spacing: 4px;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: 20px;
+  }
+  
+  .card__space-75 {
+      width: 75%;
+      float: left;
+  }
+  
+  .card__space-25 {
+      width: 25%;
+      float: left;
+  }
+  
+  .card__label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px;
+  }
+  
+  .card__info {
+      margin-bottom: 0;
+      margin-top: 5px;
+      font-size: 16px;
+      line-height: 18px;
+      color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .card__back-content {
+      padding: 15px 15px 0;
+  }
+  .card__secret--last {
+      color: #303030;
+      text-align: right;
+      margin: 0;
+      font-size: 14px;
+  }
+  
+  .card__secret {
+      padding: 5px 12px;
+      background-color: #fff;
+      position:relative;
+  }
+  
+  .card__secret:before{
+    content:'';
+    position: absolute;
+  top: -3px;
+  left: -3px;
+  height: calc(100% + 6px);
+  width: calc(100% - 42px);
+  border-radius: 4px;
+    background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
+  }
+  
+  .card__back-logo {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+  }
+  
+  .card__back-square {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+  }
+  
+  .card:hover .card__front {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+  
+  }
+  
+  .card:hover .card__back {
+      -webkit-transform: rotateY(0deg);
+      -moz-transform: rotateY(0deg);
+  }
+
 @media screen and (min-width: 768px) {
   .cardbill {
     width: 30%;
   }
 }
+
+@media screen and (max-width: 426px) {
+  .pay {
+    display: block;
+  }
+}
+
 
 @keyframes App-logo-spin {
   from {

@@ -10,8 +10,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import cuisine1 from "./cuisine1.jpg";
 
-
-function IndividualOrder() {
+function Editpage() {
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -20,7 +19,7 @@ function IndividualOrder() {
 
   useEffect(() => {
     setFoodItem(location.state.item);
-  },[])
+  }, []);
 
   const addItem = () => {
     let tempCount = counter;
@@ -38,59 +37,18 @@ function IndividualOrder() {
     }
   };
 
-  console.log(foodItem);
-  const cartItem = async () => {
-    try {
-      let res = await fetch("http://127.0.0.1:8000/restaurant/order/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          resId: location.state.resId,
-          userId: location.state.userId,
-          foodId: location.state.item.id,
-          quantity: counter,
-          price: counter * location.state.item.price,
-        }),
-      });
-
-      let resJson = await res.json();
-      console.log(resJson);
-
-      if (res.status === 200) {
-        console.log(location.state.category, location.state.resId);
-        navigate("/cuisine", {
-          state: {
-            resId: location.state.resId,
-            userId: location.state.userId,
-            category: location.state.category,
-          },
-        });
-        console.log("Working Fine.");
-      } else {
-        console.log("Not Working");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const backtomenu = () =>{
-    navigate("/cuisine", {
-      state: {
-        resId: location.state.resId,
-        userId: location.state.userId,
-        category: location.state.category,
-      },
-    });
-  };
+  //   console.log(foodItem);
 
   return (
     <>
       {/* Card */}
       <div className="individualdiv container">
-      {/* {foodItem.map((items, i) => ( */}
+        {/* {foodItem.map((items, i) => ( */}
         <Card className="individualordercard">
-          <Card.Img variant="top" src={`http://127.0.0.1:8000${foodItem.image}`} />
+          <Card.Img
+            variant="top"
+            src={`http://127.0.0.1:8000${foodItem.image}`}
+          />
           <Card.Body>
             <Card.Title>{foodItem.foodName}</Card.Title>
             <div>
@@ -98,9 +56,7 @@ function IndividualOrder() {
               <span className="vegsym1">Veg</span>
             </div>
             <div className="reviewfont">RATINGS : {foodItem.ratings}</div>
-            <Card.Text>
-              {foodItem.description}
-            </Card.Text>
+            <Card.Text>{foodItem.description}</Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroup.Item style={{ display: "flex" }}>
@@ -119,7 +75,9 @@ function IndividualOrder() {
               <textarea
                 className="separatedesc"
                 placeholder="Customize according to your taste."
-              ></textarea>
+              >
+                {foodItem.description}
+              </textarea>
             </ListGroup.Item>
             <ListGroup.Item>
               <b>Price:</b> &#8377; {foodItem.price}.00
@@ -129,24 +87,28 @@ function IndividualOrder() {
             {/* <Card.Link href="#">Card Link</Card.Link>
               <Card.Link href="#">Another Link</Card.Link> */}
             <div className="flex">
-              <Button className="individual_btn"
-
-                onClick={backtomenu}
+              <Button
+                className="individual_btn"
+                onClick={() => {
+                  navigate("/bill", {
+                    state: {
+                      resId: location.state.resId,
+                      userId: location.state.userId,
+                      status: 0
+                    },
+                  });
+                }}
               >
-                Back to Menu
+                Back
               </Button>
-              <Button className="individual_btn"
-                onClick={cartItem}
-              >
-                Add
-              </Button>
+              <Button className="individual_btn">Update</Button>
             </div>
           </Card.Body>
         </Card>
-      {/* ))}; */}
+        {/* ))}; */}
       </div>
     </>
   );
 }
 
-export default IndividualOrder;
+export default Editpage;
