@@ -9,6 +9,8 @@ import Description from './Description';
 import TotalToKitchen from './TotalToKitchen';
 import Bill from './Bill';
 import Makepayment from './Makepayment';
+import Cardpayment from './Cardpayment';
+import Editpage from './Editpage';
 import {useState} from 'react';
 import IndividualOrder from './IndividualOrder';
 import { 
@@ -41,11 +43,14 @@ function App() {
         <Route path='/' element={reg}/>
         <Route path='/home' element={<><NavBar/> <Home/></>}/>
         <Route path='/cuisine' element={<><NavBar/> <Cuisine/></>}/>
-        <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>        
+        <Route path='/individual' element={<><NavBar/> <IndividualOrder/></>}/>  
+        <Route path='/edit' element={<><NavBar/> <Editpage/></>}/>        
         <Route path='/desc' element={<><NavBar/> <Description/> <TotalToKitchen/></>}/>
         <Route path='/bill' element={<><NavBar/> <Bill/></>}/>
+        <Route path='/payment' element={<><NavBar/> <Makepayment/></>}/>
         <Route path='/feedback' element={<><NavBar/><Feedback/></>}/>
         <Route path='/contact' element={<><NavBar/><Loader/></>}/>
+        <Route path='/card' element={<><NavBar/><Cardpayment/></>}/>
       </Routes>
     </BrowserRouter>
     {/* <NavBar/> */}
