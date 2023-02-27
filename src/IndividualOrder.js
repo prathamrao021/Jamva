@@ -129,16 +129,13 @@ function IndividualOrder() {
             {/* <Card.Link href="#">Card Link</Card.Link>
               <Card.Link href="#">Another Link</Card.Link> */}
             <div className="flex">
-              <Button
-                style={{ width: "45%" }}
-                variant="danger"
+              <Button className="individual_btn"
+
                 onClick={backtomenu}
               >
                 Back to Menu
               </Button>
-              <Button
-                style={{ width: "45%" }}
-                variant="warning"
+              <Button className="individual_btn"
                 onClick={cartItem}
               >
                 Add
