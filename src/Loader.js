@@ -5,10 +5,7 @@ function Loader()
     return(
         <div className='loader'>
             <img src={gif1}></img>
-        </div>
-        
-    )
-    
+        </div>   
+    )   
 }
-
 export default Loader;
