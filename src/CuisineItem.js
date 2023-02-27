@@ -99,6 +99,7 @@ function CuisineItem() {
                 resId: location.state.resId,
                 userId: location.state.userId,
                 category: location.state.category,
+                price: price
               },
             })
           }
@@ -139,8 +140,9 @@ function CuisineItem() {
 
         <div className="categories">
           {category.map((items, i) => (
-            <>
+            <div key={i}>
               <Button
+              // className="individual_btn"
                 onClick={() => {
                   location.state.category = items.category;
                   menus();
@@ -148,22 +150,13 @@ function CuisineItem() {
               >
                 {items.category}
               </Button>
-              {/* <div className="cardholder floatingcat">Continental</div> */}
-              <Button
-                onClick={() => {
-                  location.state.category = items.category;
-                  menus();
-                }}
-              >
-                {items.category}
-              </Button>
-            </>
+            </div>
           ))}
         </div>
       </div>
 
       <div className="cuisinepage">
-        <h3 class="m-2">{location.state.category}</h3>
+        <h3 className="m-2">{location.state.category}</h3>
         {menuItems.map((item, i) => (
           <div key={i} className="cuisines">
             <div className="cuisineitems">
