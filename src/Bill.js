@@ -48,7 +48,7 @@ function Bill() {
     }
   };
 
-  const backtomenu = () =>{
+  const backtomenu = () => {
     navigate("/home", {
       state: {
         resId: location.state.resId,
@@ -68,7 +68,7 @@ function Bill() {
           <Form.Control type="text" placeholder="Eg. 21" />
         </Form.Group>
       </Form>
-      {console.log(items)}
+      {/* {console.log(items)} */}
 
       {/* <div className="cuisinepage">
         {items.map((item, i) => (
@@ -125,10 +125,20 @@ function Bill() {
               {/* <Card.Link href="#">Card Link</Card.Link>
               <Card.Link href="#">Another Link</Card.Link> */}
               <div className="flex">
-                <Button style={{ width: "45%" }} variant="danger">
-                  &#9746;
-                </Button>
-                <Button style={{ width: "45%" }} variant="warning">
+                <Button className="individual_btn">&#9746;</Button>
+                <Button
+                  className="individual_btn"
+                  onClick={() => {
+                    navigate("/edit", {
+                      state: {
+                        resId: location.state.resId,
+                        userId: location.state.userId,
+                        category: location.state.category,
+                        item: item
+                      },
+                    });
+                  }}
+                >
                   &#9998;
                 </Button>
               </div>
@@ -136,20 +146,22 @@ function Bill() {
           </Card>
         ))}
       </div>
-      <div className="individualcard">
-          <div className="flex m-1">
-            <h5>Total Payment</h5>
-            <p>&#8377; 2000.00</p>
-          </div>
-          <div className="flex">
-            <Button style={{ width: "45%" }} variant="warning" onClick={backtomenu}>
-              Back to Menu
-            </Button>
-            <Button style={{ width: "45%" }} variant="success">
-              Pay to Order
-            </Button>
-          </div>
+      <div className="makepaymentcard">
+        <div className="flex m-1">
+          <h5>Total Payment</h5>
+          <p>&#8377; {location.state.price}.00</p>
         </div>
+        <div className="flex">
+          <Button className="individual_btn"
+            onClick={backtomenu}
+          >
+            Back to Menu
+          </Button>
+          <Button className="individual_btn" onClick={()=>{navigate('/payment')}}>
+            Pay to Order
+          </Button>
+        </div>
+      </div>
     </>
   );
 }
